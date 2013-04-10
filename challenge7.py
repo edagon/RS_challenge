@@ -102,8 +102,8 @@ except getopt.GetoptError:
 for opt, arg in opts:
    if opt == '-h':
       print '='*30
-      print '<Usage>: challenge7.py -m <server1> -n <server2>',
-      print '-l <load balancer>'
+      print '<Usage>: challenge7.py -m <server1 name> -n <server2 name>',
+      print '-l <load balancer name>'
       print '='*30
       sys.exit()
    elif opt in ("-m", "--server1"):
