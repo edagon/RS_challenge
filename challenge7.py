@@ -150,7 +150,11 @@ else:
 # Create the Nodes
 # ------------------------------------
 
-list = servers[:2]
+if len(servers)>0:
+   list = servers[:2]
+else:
+   list = servers
+
 node1 = clb.Node(address=list[0].networks["private"][0], 
                  port=80, condition="ENABLED")
 node2 = clb.Node(address=list[1].networks["private"][0], 
