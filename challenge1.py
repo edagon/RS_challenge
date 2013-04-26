@@ -55,7 +55,7 @@ print "-"*40
 # -----------------------------------------
 images = cs.images.list()
 image = [img for img in images
-  if "Fedora 16" in img.name][0]
+  if "Ubuntu 12.04" in img.name][0]
 print "Image Selected ", image
 
 flavors = cs.flavors.list()
