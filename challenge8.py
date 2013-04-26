@@ -1,5 +1,8 @@
 # Rackspace API Challenge 8
-# Write a script that creates a CDN-enabled container in Cloud Files.
+# Write a script that will create a static webpage served out of Cloud Files. The script 
+# must create a new container, cdn enable it, enable it to serve an index file, create an 
+# index file object, upload the object to the container, and create a CNAME record pointing 
+# to the CDN URL of the container.
 
 #!/usr/bin/python
 import pyrax, os, sys, getopt
@@ -9,6 +12,13 @@ pyrax.set_credential_file("credentials.txt")
 cf = pyrax.cloudfiles
 dns = pyrax.cloud_dns
 content = '3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679821480865132823066470938446095505822317253594081284811174502841027019385211055596446229489549303819644288109756659334461284756482337867831652712019091456485669234603486104543266482133936072602491412737245870066063155881748815209209628292540917153643678925903600113'
+
+#  ============================================================
+#  Definition Section
+#
+#  print_records(cont) - prints CONTAINER information
+#  ValidHost(name) - determines the validit of DOMAIN and HOST
+#  ============================================================
 
 def print_record(cont):
    print "="*30
@@ -112,16 +122,13 @@ print '='*45
 cf.make_container_public(cont.name, ttl=900)
 print_record(cont)
 
-# Copying CONTENT to Object 
+# Copying CONTENT to Object | Creating index.html
 # Attaching URL information 
 
 obj = cf.store_object(cont, "index.html", content)
 print 'Stored Object:', obj
 
-#key = cf.get_temp_url_key()
-#secs = 60*15
-
-objurl =cont.cdn_uri+ '/index.htm'
+objurl =cont.cdn_uri+ '/index.html'
 objurl = objurl[7:]
 
 # create domain > name
